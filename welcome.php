@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+ <html>
 <body>
 
-
-<form action="welcome4.php" method="post">
-Username: <input type="text" name="username"><br>
-Legend name: <input type="text" name="legendname"><br>
-<input type="submit">
+ <form action= "deliverable4.php" method="post">
+        <br>
+<input type="submit" value="View Table">
 </form>
 
-<br> </br>
-<br> </br>
-<h2> PLAYER TABLE </h2>
+</body>
 
 <?php
 
@@ -34,61 +23,28 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-?>
+//INSERT
+$sqlPlayerInsert = $conn->prepare("INSERT INTO PLAYER (userName, legendName)
+VALUES (?,?)");
 
+//PREPARED STATEMENTS
+$sqlPlayerInsert->bind_param("ss",$playername,$legendname);
 
-<table>
+$playername = $_POST["username"];
+$legendname = $_POST["legendname"];
 
-<?php
+$sqlPlayerInsert->execute();
 
-//SELECT
-$sql = "SELECT userName, legendName FROM PLAYER";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-
-   //echo ' <tr>
-    //echo ' <tr>
-
-        //<td>'.Player name.'</td>
-        //<td>'.Legend name.'</td>
-
-
-
-
-        //</tr>';
-
-    while($row = $result->fetch_assoc()) {
-
-        $username=$row["userName"];
-        $legendname=$row["legendName"];
-
-        echo '
-                <tr>
-                <td>'.$username.'</td>
-                <td>'.$legendname.'</td>
-
-                </tr>';
-
-        //echo "<br>"."<br>"."Username: ".$row["username"]."<br>"." Legend name: ".$row["legendName"]."<br>";
-    }
+/*
+if ($conn->query($sqlPlayerInsert) === TRUE) {
+  echo "New Legend record created successfully";
 } else {
-echo "0 results";
-
+  echo "Error: " . $sqlPlayerInsert . "<br>" . $conn->error;
 }
+*/
 
-
-?>
-
-
-</table>
-
-
-
-<?php
+$sqlPlayerInsert->close();
 
 mysqli_close($conn);
 ?>
-
-</body>
 </html>
