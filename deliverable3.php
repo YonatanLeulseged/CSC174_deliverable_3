@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@ Legend name: <input type="text" name="legendname"><br>
 >
 
 <?php
-echo("<br>"."Top"."<br>");
+
 $servername = "ecs-pd-proj-db.ecs.csus.edu";
 $username = "CSC174030";
 $password = "Csc134_409292268";
@@ -30,31 +30,7 @@ $conn = new mysqli($servername, $username, $password,$mydb);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
 
-
-//INSERT
-
-/*
-$sqlPlayerInsert = "INSERT INTO PLAYER (username, legendName)
-VALUES ('GARY', 'Second')";
-
-$sqlLegendInsert = "INSERT INTO LEGEND (legendName,legendType,daggerName,shieldStrength,horseName)
-VALUES ('Second','Assassin','knife',NULL,NULL)";
-
-
-if ($conn->query($sqlLegendInsert) === TRUE) {
-  echo "New Player created successfully";
-} else {
-  echo "Error: " . $sqlLegendInsert . "<br>" . $conn->error;
-  }
-
-if ($conn->query($sqlPlayerInsert) === TRUE) {
-  echo "New Legend record created successfully";
-} else {
-  echo "Error: " . $sqlPlayerInsert . "<br>" . $conn->error;
-}
-*/
 
 //SELECT
 $sql = "SELECT username, legendName FROM PLAYER";
@@ -69,8 +45,6 @@ echo "0 results";
 
 }
 
-
-echo("<br>"."Bottom"."<br>");
 mysqli_close($conn);
 ?>
 
